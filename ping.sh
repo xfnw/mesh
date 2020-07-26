@@ -9,7 +9,7 @@ cp peers.txt oldpeers.txt
 printf '' > peers.txt
 
 
-peers="$(sort oldpeers.txt | uniq | awk '{print $1}' | tr '\n' ',')"
+peers="$(sort oldpeers.txt | uniq | awk '{if($2!="FORWARD"){print $1}}' | tr '\n' ',')"
 
 
 for fn in "$(sort oldpeers.txt | uniq)"; do
