@@ -2,22 +2,19 @@
 
 source config.sh
 
-cp oldpeers.txt currentpeers.txt
-cp peers.txt oldpeers.txt
 
 
-printf '' > peers.txt
 
 
-peers="$(sort oldpeers.txt | uniq | awk '{if($2!="FORWARD"){print $1}}' | tr '\n' ',')"
+peers="$(sort realpeers.txt | uniq | awk '{if($1!="FORWARD"){print $1}}' | tr '\n' ',')"
 
 
-for fn in "$(sort oldpeers.txt | uniq)"; do
+for fn in "$(sort peers.txt | uniq)"; do
 
 
-		url=$(echo "$fn" | awk '{print $2}')
+		url=$(echo "$fn" | awk '{print $1}')
 
-		curl -m 1 -L -A "xfnwmesh/1.0" -F "address=$address" -F "reply=$reply" -F "peers=$peers" $url >/dev/null 2>/dev/null &
+		curl -m 1 -L -A "xfnwmesh/1.0" -F "callback=$callback" -F "peers=$peers" $url >/dev/null 2>/dev/null && echo "$url" >> realpeers.txt
 
 
 done

@@ -1,6 +1,5 @@
 
 
-address="xfnw"
-reply='https://xfnw.ttm.sh/mesh/contact.cgi'
+callback='https://tilde.club/~xfnw/mesh/contact.cgi'
 
 

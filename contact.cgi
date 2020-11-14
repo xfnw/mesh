@@ -12,12 +12,12 @@ form = dict(cgi.FieldStorage())
 for i in form:
     form[i] = form[i].value
 
-if "address" in form and "reply" in form and "peers" in form and ',' not in form['address']:
+if "callback" in form and "peers" in form and ',' not in form['callback']:
         with open('peers.txt','r') as f:
             peers = [i.split('\t')[0] for i in f.readlines()]
-        if form['address'] not in peers:
-            subprocess.run(['./forward.sh',form['address'],form['reply'],form['peers']])
-        pob = form['address']+"\t"+form['reply']+"\t"+form['peers']
+        if form['callback'] not in peers:
+            subprocess.run(['./forward.sh',form['callback'],form['peers']])
+        pob = form['callback']+"\t"+form['peers']
         print(pob)
         with open('peers.txt','a') as f:
             f.write(pob+'\n')
@@ -25,5 +25,5 @@ if "address" in form and "reply" in form and "peers" in form and ',' not in form
 
         sys.exit()
 
-print('fill out the address and reply fields')
+print('fill out callback and peers')
 
