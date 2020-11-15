@@ -9,7 +9,7 @@ source config.sh
 peers="$(sort realpeers.txt | uniq | awk '{if($1!="FORWARD"){print $1}}' | tr '\n' ',')"
 
 
-for fn in "$(awk '{print $1}' peers.txt)"; do
+for fn in $(awk '{print $1}' peers.txt); do
 
 
 		url="$fn"
